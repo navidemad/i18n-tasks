@@ -18,6 +18,7 @@ module I18n::Tasks::Translators
       Variables (starting with %%{ and ending with }) must not be changed under any circumstance.
 
       Keep in mind the context of all the strings for a more accurate translation.
+      Return the translations as a JSON object with a 'translations' array containing the translated strings.
       It is CRITICAL you output only the result, without any additional information, code block syntax or comments.
     PROMPT
 
@@ -52,7 +53,14 @@ module I18n::Tasks::Translators
     private
 
     def translator
-      @translator ||= OpenAI::Client.new(access_token: api_key)
+      @translator ||=
+        if @i18n_tasks.translation_config[:openai_log_errors]
+          OpenAI::Client.new(access_token: api_key, log_errors: @i18n_tasks.translation_config[:openai_log_errors]) do |f|
+            f.response :logger, Logger.new($stdout), bodies: true
+          end
+        else
+          OpenAI::Client.new(access_token: api_key)
+        end
     end
 
     def api_key
