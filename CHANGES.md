@@ -1,7 +1,6 @@
 ## Unreleased
 
-* Silence parser warning and patch version mismatch for Ruby 3.4.1 [#612](https://github.com/glebm/i18n-tasks/issues/612)
-* OpenAI translator now logs errors to stdout if `OPENAI_LOG_ERRORS` is set in the environment [#612](https://github.com/glebm/i18n-tasks/issues/612)
+* Silence parser warning and patch version mismatch for Ruby 3.4.1 [#613](https://github.com/glebm/i18n-tasks/pull/613)
 * Uses AST-parser for all ERB-files, not just `.html.erb`
 * [Fixed regex in `PatternScanner`] (https://github.com/glebm/i18n-tasks/issues/572)
 * Adds contextual parser to support more Rails-translations
